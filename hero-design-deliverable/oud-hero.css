@@ -1,0 +1,656 @@
+/* ==========================================================================
+   OUD — Homepage hero ("The Arch")
+   Self-contained styles for the header + hero. Every selector is prefixed
+   `oud-` and every token lives on `.oud-top`, so nothing leaks into the
+   rest of the site.
+   ========================================================================== */
+
+/* ---- Fonts (SIL OFL 1.1, self-hosted; see fonts/OFL-*.txt) ------------- */
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("fonts/bodoni-moda-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("fonts/bodoni-moda-italic-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hanken Grotesk";
+  src: url("fonts/hanken-grotesk-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+/* Subset to the three letters of عود only (1.7 KB). */
+@font-face {
+  font-family: "Amiri OUD";
+  src: url("fonts/amiri-oud-subset.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ---- Tokens ------------------------------------------------------------ */
+.oud-top {
+  --oud-espresso: #14100d;
+  --oud-espresso-raised: #1d1713;
+  --oud-ivory: #efe7da;
+  --oud-ivory-soft: rgba(239, 231, 218, 0.74);
+  --oud-ivory-faint: rgba(239, 231, 218, 0.16);
+  --oud-saffron: #cf9156; /* the only accent — used sparingly */
+
+  --oud-serif: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --oud-sans: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --oud-arabic: "Amiri OUD", "Amiri", "Geeza Pro", serif;
+
+  --oud-gutter: clamp(20px, 4.4vw, 72px);
+  --oud-nav-h: 84px;
+  --oud-ease: cubic-bezier(0.19, 1, 0.22, 1);
+
+  position: relative;
+  background: var(--oud-espresso);
+  color: var(--oud-ivory);
+  font-family: var(--oud-sans);
+  -webkit-font-smoothing: antialiased;
+  isolation: isolate;
+  overflow: hidden; /* guards against horizontal overflow from the overlap */
+}
+
+.oud-top *,
+.oud-top *::before,
+.oud-top *::after { box-sizing: border-box; }
+
+/* Fine film grain over the whole canvas: gives the dark field the tactility
+   of a printed photograph rather than a flat UI colour. */
+.oud-top::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.oud-skip {
+  position: absolute;
+  left: var(--oud-gutter);
+  top: -100px;
+  z-index: 20;
+  padding: 10px 16px;
+  background: var(--oud-ivory);
+  color: var(--oud-espresso);
+  font: 500 0.875rem/1 var(--oud-sans);
+  text-decoration: none;
+}
+.oud-skip:focus { top: 12px; }
+
+.oud-top :focus-visible {
+  outline: 1px solid var(--oud-saffron);
+  outline-offset: 4px;
+}
+
+/* ---- Navigation -------------------------------------------------------- */
+.oud-nav {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 10;
+  height: var(--oud-nav-h);
+  padding: 0 var(--oud-gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.oud-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 14px;
+  color: var(--oud-ivory);
+  text-decoration: none;
+}
+.oud-wordmark__latin {
+  font: 500 1.5rem/1 var(--oud-serif);
+  letter-spacing: 0.32em;
+  margin-right: -0.32em;
+}
+.oud-wordmark__descriptor {
+  font: 500 0.6875rem/1 var(--oud-sans);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--oud-ivory-soft);
+}
+
+.oud-nav__list {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3vw, 44px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.oud-nav__link {
+  position: relative;
+  color: var(--oud-ivory-soft);
+  font: 500 0.75rem/1 var(--oud-sans);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 8px 0;
+  transition: color 0.4s var(--oud-ease);
+}
+.oud-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s var(--oud-ease);
+}
+.oud-nav__link:hover,
+.oud-nav__link:focus-visible { color: var(--oud-ivory); }
+.oud-nav__link:hover::after,
+.oud-nav__link:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+
+.oud-nav__link--book {
+  color: var(--oud-ivory);
+  padding: 13px 20px;
+  border: 1px solid rgba(239, 231, 218, 0.38);
+  transition: border-color 0.4s var(--oud-ease), background-color 0.4s var(--oud-ease);
+}
+.oud-nav__link--book::after { display: none; }
+.oud-nav__link--book:hover,
+.oud-nav__link--book:focus-visible {
+  border-color: var(--oud-ivory);
+  background: rgba(239, 231, 218, 0.06);
+}
+
+.oud-nav__toggle { display: none; }
+
+/* ---- Hero canvas ------------------------------------------------------- */
+.oud-hero {
+  position: relative;
+  min-height: max(100svh, 720px);
+  max-height: 1100px;
+  padding: calc(var(--oud-nav-h) + 12px) var(--oud-gutter) 0;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: 1fr auto;
+  column-gap: 24px;
+
+  /* The arch is positioned from the headline's size, so the italic last
+     line always crosses into it by the same proportion at every width. */
+  --oud-title: clamp(3.25rem, min(9.6vw, 17vh), 11.5rem);
+  --oud-arch-h: max(520px, min(calc(100svh - var(--oud-nav-h) - 150px), 860px));
+  --oud-arch-x: calc(4.3 * var(--oud-title));
+}
+
+/* Copy block: sits over the left of the canvas and reaches into the arch. */
+.oud-hero__copy {
+  grid-column: 1 / 10;
+  grid-row: 1;
+  align-self: center;
+  position: relative;
+  z-index: 3;
+  padding-bottom: 2vh;
+}
+
+.oud-hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 clamp(20px, 3.4vh, 36px);
+  font: 500 0.75rem/1.4 var(--oud-sans);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--oud-ivory-soft);
+}
+.oud-hero__eyebrow::before {
+  content: "";
+  width: 44px;
+  height: 1px;
+  background: var(--oud-saffron);
+}
+
+.oud-hero__title {
+  margin: 0;
+  font-family: var(--oud-serif);
+  font-weight: 400;
+  font-size: var(--oud-title);
+  font-variation-settings: "opsz" 96;
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  color: var(--oud-ivory);
+}
+.oud-hero__line {
+  display: block;
+  overflow: hidden;
+  /* room for descenders/italic overhang inside the mask */
+  padding: 0.04em 0.08em 0.1em 0;
+  margin-bottom: -0.1em;
+}
+.oud-hero__line > span { display: inline-block; }
+.oud-hero__line--indent { padding-left: 0.62em; }
+.oud-hero__title em {
+  font-style: italic;
+  color: var(--oud-saffron);
+}
+.oud-hero__title .oud-hero__amp {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--oud-saffron);
+  margin-right: 0.04em;
+}
+
+.oud-hero__lede {
+  max-width: 40ch;
+  margin: clamp(24px, 4vh, 44px) 0 0;
+  font: 400 1.0625rem/1.65 var(--oud-sans);
+  color: var(--oud-ivory-soft);
+}
+
+.oud-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 36px;
+  margin-top: clamp(26px, 4.4vh, 44px);
+}
+
+.oud-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 52px;
+  padding: 0 30px;
+  background: var(--oud-ivory);
+  color: var(--oud-espresso);
+  font: 600 0.78rem/1 var(--oud-sans);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.5s var(--oud-ease), color 0.5s var(--oud-ease);
+}
+.oud-btn:hover,
+.oud-btn:focus-visible { background: var(--oud-saffron); color: var(--oud-espresso); }
+
+.oud-link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  color: var(--oud-ivory);
+  font: 500 0.78rem/1 var(--oud-sans);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 calc(100% - 10px) / 100% 1px no-repeat;
+  transition: background-size 0.6s var(--oud-ease);
+}
+.oud-link-arrow svg { transition: transform 0.6s var(--oud-ease); }
+.oud-link-arrow:hover svg,
+.oud-link-arrow:focus-visible svg { transform: translateX(6px); }
+.oud-link-arrow:hover { background-size: 0% 1px; background-position: 100% calc(100% - 10px); }
+
+/* ---- The arch ---------------------------------------------------------- */
+.oud-hero__figure {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  justify-self: start;
+  align-self: center;
+  position: relative;
+  z-index: 1;
+  margin: 0 0 0 var(--oud-arch-x);
+  height: var(--oud-arch-h);
+  aspect-ratio: 0.72;
+}
+
+/* Hairline echo of the arch, offset up-left: the moulding of a mihrab. */
+.oud-hero__moulding {
+  position: absolute;
+  inset: -22px 22px 22px -22px;
+  width: calc(100% + 0px);
+  height: calc(100% + 0px);
+  overflow: visible;
+  pointer-events: none;
+  z-index: -1;
+}
+.oud-hero__moulding path {
+  fill: none;
+  stroke: var(--oud-saffron);
+  stroke-opacity: 0.55;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.oud-hero__frame {
+  position: absolute;
+  inset: 0;
+  clip-path: url(#oud-arch-tall);
+  background: var(--oud-espresso-raised);
+  overflow: hidden;
+}
+
+.oud-hero__media {
+  position: absolute;
+  inset: -6% 0; /* headroom for the parallax drift */
+  will-change: transform;
+}
+
+.oud-hero__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--oud-focal, 50% 55%);
+}
+
+/* Photography placeholder — deliberately reads as a slot, not a photo. */
+.oud-hero__pending {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 0 12% 16%;
+  text-align: center;
+  background:
+    radial-gradient(60% 42% at 58% 52%, rgba(207, 145, 86, 0.2), transparent 70%),
+    radial-gradient(120% 80% at 50% 40%, #2a1f17 0%, #17110d 62%, #100c09 100%);
+}
+.oud-hero__pending::before {
+  /* the plate's position in the brief, drawn as a register mark */
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: 62%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border: 1px dashed rgba(239, 231, 218, 0.22);
+  border-radius: 50%;
+}
+.oud-hero__pending-kicker {
+  font: 600 0.6875rem/1 var(--oud-sans);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--oud-saffron);
+}
+.oud-hero__pending-brief {
+  max-width: 30ch;
+  font: italic 400 1rem/1.45 var(--oud-serif);
+  color: var(--oud-ivory-soft);
+}
+
+/* Low-key vignette so overlapping type always sits on dark tones. */
+.oud-hero__frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(20, 16, 13, 0.55) 0%, rgba(20, 16, 13, 0) 38%);
+}
+
+.oud-hero__caption {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 16px);
+  font: 500 0.6875rem/1.4 var(--oud-sans);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--oud-ivory-soft);
+}
+.oud-hero__caption b { font-weight: 500; color: var(--oud-ivory); }
+
+/* ---- Vertical margin: the name in Arabic + the address ----------------- */
+.oud-hero__margin {
+  grid-column: 12 / 13;
+  grid-row: 1;
+  justify-self: end;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  z-index: 2;
+}
+.oud-hero__arabic {
+  font: 400 2.75rem/1 var(--oud-arabic);
+  color: var(--oud-saffron);
+}
+.oud-hero__address {
+  writing-mode: vertical-rl;
+  font: 500 0.6875rem/1 var(--oud-sans);
+  font-style: normal;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--oud-ivory-soft);
+  white-space: nowrap;
+}
+
+/* ---- Menu index along the foot of the hero ----------------------------- */
+.oud-hero__index {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  align-items: baseline;
+  gap: 28px;
+  margin-top: 28px;
+  padding: 22px 0 26px;
+  border-top: 1px solid var(--oud-ivory-faint);
+  position: relative;
+  z-index: 3;
+}
+.oud-hero__index-label {
+  flex: none;
+  font: italic 400 1rem/1 var(--oud-serif);
+  color: var(--oud-saffron);
+}
+.oud-hero__index-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 2.4em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 500 0.6875rem/1.2 var(--oud-sans);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--oud-ivory-soft);
+}
+
+/* ---- Entrance motion (CSS only, runs once) ----------------------------- */
+@keyframes oud-rise { from { transform: translateY(108%); } to { transform: none; } }
+@keyframes oud-fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes oud-unveil {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes oud-settle { from { transform: scale(1.12); } to { transform: scale(1); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .oud-hero__line > span { animation: oud-rise 1.25s var(--oud-ease) both; }
+  .oud-hero__line:nth-child(1) > span { animation-delay: 0.35s; }
+  .oud-hero__line:nth-child(2) > span { animation-delay: 0.47s; }
+  .oud-hero__line:nth-child(3) > span { animation-delay: 0.59s; }
+
+  .oud-hero__figure-reveal { animation: oud-unveil 1.6s var(--oud-ease) 0.1s both; }
+  .oud-hero__media > * { animation: oud-settle 2.4s var(--oud-ease) 0.1s both; }
+  .oud-hero__moulding { animation: oud-fade 1.6s var(--oud-ease) 0.9s both; }
+
+  .oud-hero__eyebrow,
+  .oud-hero__lede,
+  .oud-hero__actions,
+  .oud-hero__caption,
+  .oud-hero__margin,
+  .oud-hero__index,
+  .oud-nav { animation: oud-fade 1s var(--oud-ease) both; }
+  .oud-nav { animation-delay: 0.2s; }
+  .oud-hero__eyebrow { animation-delay: 0.3s; }
+  .oud-hero__lede,
+  .oud-hero__actions { animation-delay: 0.95s; }
+  .oud-hero__caption,
+  .oud-hero__margin,
+  .oud-hero__index { animation-delay: 1.2s; }
+}
+
+.oud-hero__figure-reveal { position: absolute; inset: 0; }
+
+/* ---- Laptop (short or narrower desktop) -------------------------------- */
+@media (max-width: 1279px) {
+  .oud-hero__copy { grid-column: 1 / 11; }
+}
+
+/* ---- Tablet ------------------------------------------------------------ */
+@media (max-width: 1023px) {
+  .oud-top { --oud-nav-h: 76px; }
+  .oud-hero__eyebrow { display: none; }
+  .oud-hero__pending { align-items: flex-end; text-align: right; padding-right: 9%; }
+  .oud-hero { max-height: none; min-height: 0; padding-bottom: 0; }
+  .oud-hero__copy { grid-column: 1 / -1; align-self: end; padding-bottom: 0; }
+  .oud-hero__figure {
+    grid-column: 5 / 13;
+    justify-self: end;
+    align-self: start;
+    height: auto;
+    width: min(100%, 56vh);
+    margin: 28px 0 0;
+  }
+  .oud-hero__copy { grid-row: 1; margin-top: 38vh; }
+  .oud-hero__margin { display: none; }
+  .oud-hero__index { margin-top: 56px; }
+}
+
+/* ---- Mobile: recomposed as a vertical poster --------------------------- */
+@media (max-width: 767px) {
+  .oud-top { --oud-nav-h: 68px; --oud-gutter: 20px; }
+
+  .oud-wordmark { gap: 12px; }
+  .oud-wordmark__descriptor { font-size: 0.625rem; letter-spacing: 0.16em; }
+  .oud-nav__list { display: none; }
+  .oud-nav__list[data-open="true"] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    position: absolute;
+    top: var(--oud-nav-h);
+    left: 0;
+    right: 0;
+    padding: 18px var(--oud-gutter) 28px;
+    background: var(--oud-espresso);
+    border-bottom: 1px solid var(--oud-ivory-faint);
+  }
+  .oud-nav:has([data-open="true"]) { background: var(--oud-espresso); }
+  .oud-nav__list[data-open="true"] .oud-nav__link { display: inline-block; font-size: 0.8125rem; padding: 12px 0; }
+  .oud-nav__list[data-open="true"] .oud-nav__link--book { margin-top: 8px; padding: 14px 20px; }
+
+  .oud-nav__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--oud-ivory);
+    font: 500 0.75rem/1 var(--oud-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .oud-nav__toggle-bars {
+    display: grid;
+    gap: 5px;
+    width: 22px;
+  }
+  .oud-nav__toggle-bars::before,
+  .oud-nav__toggle-bars::after {
+    content: "";
+    height: 1px;
+    background: currentColor;
+    transition: transform 0.4s var(--oud-ease);
+  }
+  .oud-nav__toggle[aria-expanded="true"] .oud-nav__toggle-bars::before { transform: translateY(3px) rotate(45deg); }
+  .oud-nav__toggle[aria-expanded="true"] .oud-nav__toggle-bars::after { transform: translateY(-3px) rotate(-45deg); }
+
+  .oud-hero {
+    display: flex;
+    flex-direction: column;
+    padding-top: calc(var(--oud-nav-h) + 4px);
+  }
+
+  .oud-hero__figure {
+    order: 1;
+    align-self: center;
+    width: min(100%, calc(62svh * 0.8));
+    aspect-ratio: 0.8;
+    margin-top: 6px;
+  }
+  .oud-hero__frame { clip-path: url(#oud-arch-mobile); }
+  .oud-hero__frame::after {
+    background: linear-gradient(0deg, rgba(20, 16, 13, 0.92) 0%, rgba(20, 16, 13, 0) 34%);
+  }
+  .oud-hero__moulding { inset: -12px 12px 12px -12px; }
+  .oud-hero__caption { display: none; }
+  .oud-hero__pending { align-items: center; text-align: center; padding: 0 12% 34%; }
+  .oud-hero__pending-brief { font-size: 0.9375rem; }
+
+  .oud-hero__copy {
+    order: 2;
+    margin-top: -0.95em; /* headline overlaps the foot of the arch */
+    font-size: clamp(3rem, 15.2vw, 4.5rem);
+  }
+  .oud-hero__title { font-size: 1em; line-height: 0.92; }
+  .oud-hero__line--indent { padding-left: 0.42em; }
+  .oud-hero__lede { font-size: 1rem; margin-top: 22px; }
+  .oud-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    margin-top: 26px;
+  }
+  .oud-btn { min-height: 54px; }
+  .oud-link-arrow { justify-content: center; background: none; }
+
+  .oud-hero__index {
+    order: 3;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 34px;
+    padding-top: 18px;
+  }
+  .oud-hero__index-list { gap: 10px 1.8em; }
+}
+
+/* Short phones: keep the primary action inside the first viewport. */
+@media (max-width: 767px) and (max-height: 760px) {
+  .oud-hero__figure { width: min(100%, calc(48svh * 0.8)); }
+  .oud-hero__lede { margin-top: 16px; font-size: 0.9375rem; line-height: 1.55; }
+  .oud-hero__actions { margin-top: 20px; }
+  .oud-hero__pending { padding: 0 6% 34%; }
+}
+
+/* ---- Parallax hook (driven by oud-hero.js) ----------------------------- */
+.oud-hero__media { transform: translate3d(0, var(--oud-drift, 0px), 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .oud-top *,
+  .oud-top *::before,
+  .oud-top *::after { transition-duration: 0.01ms !important; }
+  .oud-hero__media { transform: none; }
+}

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OUD Restaurant — Indo-Arabic, Moseley</title>
+  <meta name="description" content="OUD is an Indo-Arabic restaurant in Moseley, Birmingham, bringing together the richness of Indian and Arabic culinary traditions.">
+  <meta name="theme-color" content="#14100d">
+  <!-- Preload only the roman display face; it carries the largest type. -->
+  <link rel="preload" href="fonts/bodoni-moda-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- When Shot 01 is delivered, also preload the hero image:
+  <link rel="preload" as="image" type="image/avif"
+        imagesrcset="assets/hero-shot-01-800.avif 800w, assets/hero-shot-01-1200.avif 1200w, assets/hero-shot-01-1600.avif 1600w"
+        imagesizes="(min-width: 1024px) 40vw, 92vw"> -->
+  <link rel="stylesheet" href="oud-hero.css">
+  <style>
+    /* Demo page only — not part of the hero. */
+    html, body { margin: 0; background: #14100d; }
+    .demo-below { padding: 96px 20px; text-align: center; color: rgba(239,231,218,.5);
+                  font: 400 0.875rem/1.6 "Hanken Grotesk", Arial, sans-serif; }
+  </style>
+</head>
+<body>
+
+<!-- ================= OUD HERO: copy from here ================= -->
+<div class="oud-top">
+  <a class="oud-skip" href="#main">Skip to content</a>
+
+  <!-- Arch geometry (Mughal pointed arch), two proportions so the crown keeps
+       its shape at both desktop (0.72) and mobile (0.8) aspect ratios. -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <clipPath id="oud-arch-tall" clipPathUnits="objectBoundingBox">
+      <path d="M0,1 L0,0.33 C0,0.19 0.2,0.085 0.5,0 C0.8,0.085 1,0.19 1,0.33 L1,1 Z"/>
+    </clipPath>
+    <clipPath id="oud-arch-mobile" clipPathUnits="objectBoundingBox">
+      <path d="M0,1 L0,0.36 C0,0.21 0.2,0.095 0.5,0 C0.8,0.095 1,0.21 1,0.36 L1,1 Z"/>
+    </clipPath>
+  </svg>
+
+  <header class="oud-nav">
+    <!-- Typographic stand-in for the logo. Replace with the official logo file (see README §4). -->
+    <a class="oud-wordmark" href="/" aria-label="OUD Restaurant, home">
+      <span class="oud-wordmark__latin">OUD</span>
+      <span class="oud-wordmark__descriptor">Indo-Arabic · Moseley</span>
+    </a>
+
+    <nav aria-label="Primary">
+      <button class="oud-nav__toggle" type="button" aria-expanded="false" aria-controls="oud-nav-list">
+        <span class="oud-nav__toggle-bars" aria-hidden="true"></span>
+        <span class="oud-nav__toggle-label">Menu</span>
+      </button>
+      <ul class="oud-nav__list" id="oud-nav-list">
+        <li><a class="oud-nav__link" href="#menu">Our menu</a></li>
+        <li><a class="oud-nav__link" href="/about-us">About</a></li>
+        <li><a class="oud-nav__link oud-nav__link--book" href="/book-a-table">Book a table</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="oud-hero" aria-labelledby="oud-hero-title">
+    <div class="oud-hero__copy">
+      <p class="oud-hero__eyebrow">Indo-Arabic kitchen — Moseley, Birmingham</p>
+
+      <h1 class="oud-hero__title" id="oud-hero-title">
+        <span class="oud-hero__line"><span>India</span></span>
+        <span class="oud-hero__line oud-hero__line--indent"><span><span class="oud-hero__amp">&amp;</span> Arabia,</span></span>
+        <span class="oud-hero__line"><span><em>at one table.</em></span></span>
+      </h1>
+
+      <p class="oud-hero__lede">
+        Bringing together the richness of Indian and Arabic culinary traditions,
+        from Hyderabadi kabsa to the Royal OUD biryani.
+      </p>
+
+      <div class="oud-hero__actions">
+        <a class="oud-btn" href="/book-a-table">Book a table</a>
+        <a class="oud-link-arrow" href="#menu">
+          Explore the menu
+          <svg width="22" height="10" viewBox="0 0 22 10" aria-hidden="true" focusable="false">
+            <path d="M0 5h20M16 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <figure class="oud-hero__figure">
+      <svg class="oud-hero__moulding" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path d="M0,1 L0,0.33 C0,0.19 0.2,0.085 0.5,0 C0.8,0.085 1,0.19 1,0.33 L1,1"/>
+      </svg>
+
+      <div class="oud-hero__figure-reveal">
+        <div class="oud-hero__frame">
+          <div class="oud-hero__media">
+            <!--
+              PHOTOGRAPHY SLOT — Shot 01 (see README §3 for the brief and export sizes).
+              When the photograph is delivered, delete the .oud-hero__pending block
+              below and uncomment this <picture>. Update the alt text and caption to
+              describe the actual dish photographed.
+
+            <picture>
+              <source type="image/avif"
+                      srcset="assets/hero-shot-01-800.avif 800w, assets/hero-shot-01-1200.avif 1200w, assets/hero-shot-01-1600.avif 1600w"
+                      sizes="(min-width: 1024px) 40vw, 92vw">
+              <source type="image/webp"
+                      srcset="assets/hero-shot-01-800.webp 800w, assets/hero-shot-01-1200.webp 1200w, assets/hero-shot-01-1600.webp 1600w"
+                      sizes="(min-width: 1024px) 40vw, 92vw">
+              <img class="oud-hero__img"
+                   src="assets/hero-shot-01-1200.jpg"
+                   srcset="assets/hero-shot-01-800.jpg 800w, assets/hero-shot-01-1200.jpg 1200w, assets/hero-shot-01-1600.jpg 1600w"
+                   sizes="(min-width: 1024px) 40vw, 92vw"
+                   width="1600" height="2222"
+                   alt="Lamb shank kabsa on a copper platter, saffron rice scattered with toasted almonds, lit from one side against a dark table"
+                   fetchpriority="high" decoding="async">
+            </picture>
+            -->
+            <div class="oud-hero__pending" role="img" aria-label="Photography to be supplied">
+              <span class="oud-hero__pending-kicker">Photography slot · Shot 01</span>
+              <span class="oud-hero__pending-brief">A signature kabsa, overhead, single window light. Brief in README.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Uncomment with the photograph; name the dish actually shown.
+      <figcaption class="oud-hero__caption">Pictured — <b>Lamb Shank Kabsa</b></figcaption> -->
+    </figure>
+
+    <div class="oud-hero__margin">
+      <span class="oud-hero__arabic" lang="ar" dir="rtl" aria-hidden="true">عود</span>
+      <!-- Address as indexed from oudrestaurant.co.uk/about-us — confirm before launch. -->
+      <address class="oud-hero__address">2 Woodbridge Road · Moseley · B13 8EJ</address>
+    </div>
+
+    <div class="oud-hero__index">
+      <span class="oud-hero__index-label" id="oud-index-label">On the menu</span>
+      <!-- Section names as used on the current site. -->
+      <ul class="oud-hero__index-list" aria-labelledby="oud-index-label">
+        <li>To Start With</li>
+        <li>Bread Selection</li>
+        <li>Rice</li>
+        <li>Biryanis</li>
+        <li>Kabsa</li>
+        <li>Curries and Classics</li>
+        <li>OUD’s Signature</li>
+        <li>Something Sweet</li>
+      </ul>
+    </div>
+  </section>
+</div>
+<script src="oud-hero.js" defer></script>
+<!-- ================= OUD HERO: copy to here ================= -->
+
+<!-- Demo only: stands in for the rest of the homepage so #menu resolves. -->
+<main id="main">
+  <section id="menu" class="demo-below">The rest of the homepage (menu sections) continues here.</section>
+</main>
+
+</body>
+</html>
